@@ -1,3 +1,5 @@
+import Button from "./Button"
+
 export default function AccountingTable(){
 
     return(
@@ -20,9 +22,7 @@ export default function AccountingTable(){
           </div>
         </div>
 
-        <div className="absolute rounded-full self-center -bottom-5 bg-paleOrange w-12 h-12 flex items-center justify-center cursor-pointer hover:scale-125 transition ease-in-out duration-700">
-          <img className="w-4/6 h-4/6" src="./plus.png" alt="For adding an expense, click here" />
-        </div>
+        <Button/>
     </div>
     )  
 }
