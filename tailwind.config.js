@@ -9,7 +9,8 @@ export default {
       background: '#f7e9dc',
       paleOrange: '#ec755d',
       white: '#fffcf7',
-      paleBlue: '#76b5bc'
+      paleBlue: '#76b5bc',
+      black: '#ffff'
     },
     extend: {
     },

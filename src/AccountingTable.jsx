@@ -18,10 +18,23 @@ export default function AccountingTable(){
       setDisplayError(false)
     }
 
+    const inputChecker = () =>{
+      const income = document.getElementById('income')
+      const expense = document.getElementById('expense')
+
+      const selectedRadioButtonValue = income.checked ? 'income' : expense.checked ? 'expense' : '';
+      if (selectedRadioButtonValue === ''){
+        setDisplayError(true)
+        return
+      }
+
+  
+    }
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      checkNumber();
+      inputChecker()
+      checkNumber()
     }
 
     const handleClick = () => {
@@ -67,7 +80,7 @@ export default function AccountingTable(){
             <input type="text" placeholder="500€" className="quantity mx-auto w-1/3"/>
 
             <button className="mx-auto border-none rounded-md w-20 bg-background" onClick={handleSubmit}>Añadir</button>
-            {displayError && <span className="text-smfont-bold">Error: number must be bigger than 0.0</span>}
+            {displayError && <span className="text-smfont-bold">Seems that your input is wrong...</span>}
           </form>
 
           
