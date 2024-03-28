@@ -6,6 +6,7 @@ export default function AccountingTable(){
 
     const checkNumber = () => {
       const valueToAdd = document.querySelector('.quantity').value; // obtain the value from the input label
+
       if (isNaN(Number(valueToAdd))){
         setDisplayError(true)
         return
@@ -13,9 +14,17 @@ export default function AccountingTable(){
       else if (Number(valueToAdd) <= 0.0){
         setDisplayError(true)
         return
-      } 
+      }
+      return true
+    }
 
-      setDisplayError(false)
+    const checkText = () => {
+      const valueToCheck = document.querySelector('.description').value
+      if (valueToCheck === ''){
+        setDisplayError(true)
+        return
+      }
+      return true
     }
 
     const inputChecker = () =>{
@@ -27,14 +36,15 @@ export default function AccountingTable(){
         setDisplayError(true)
         return
       }
-
-  
+      return true
     }
 
     const handleSubmit = (e) => {
-      e.preventDefault();
-      inputChecker()
-      checkNumber()
+      e.preventDefault()
+      const checkers = [checkNumber(), checkText(), inputChecker()]
+      if (checkers[0] === true && checkers[1] === true && checkers[2] === true){
+        setDisplayError(false)
+      }
     }
 
     const handleClick = () => {
@@ -62,8 +72,8 @@ export default function AccountingTable(){
           </div>
         </div>
 
-        <section className={`flex flex-col gap-10 bg-paleBlue absolute bottom-0 w-full h-2/4 rounded-lg transition duration-400 ${isRotated ? 'opacity-100' : 'opacity-0'}`}>
-          <h2 className="text-center mx-auto mt-2 font-semibold h-5">Add new expense</h2>
+        <section className={`flex flex-col bg-paleBlue absolute bottom-0 w-full h-2/4 rounded-lg transition duration-400 ${isRotated ? 'opacity-100' : 'opacity-0'}`}>
+          <h2 className="text-center mx-auto my-2 font-semibold h-5">Add new expense</h2>
           <form className="flex flex-col mx-auto gap-5">
             <div className="flex flex-row gap-5 mx-auto">
               <div>
@@ -77,9 +87,11 @@ export default function AccountingTable(){
               </div>
             </div>
 
-            <input type="text" placeholder="500€" className="quantity mx-auto w-1/3"/>
+            <input type="text" placeholder="500€" className="quantity mx-auto w-20 h-8 indent-2 rounded-md"/>
 
-            <button className="mx-auto border-none rounded-md w-20 bg-background" onClick={handleSubmit}>Añadir</button>
+            <input type="text" placeholder="Dining with friends" className="description mx-auto w-48 h-8 indent-2 rounded-md" />
+
+            <button className="mx-auto border-none rounded-md w-20 bg-background text-center" onClick={handleSubmit}>Add</button>
             {displayError && <span className="text-smfont-bold">Seems that your input is wrong...</span>}
           </form>
 
